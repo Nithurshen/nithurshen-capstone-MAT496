@@ -46,7 +46,7 @@ This project demonstrates the practical application of Large Language Models in 
 
 I plan to excecute these steps to complete my project.
 
-- [ ] **Step 1:** Setup & State Definition:
+- [X] **Step 1:** Setup & State Definition:
 Define the ReviewState using Pydantic. This includes schemas for PR metadata, file diffs, and the list of generated review comments.
 - [ ] **Step 2:** GitHub Integration (Tools):
 Implement the GitHubTool class using PyGithub. Create functions to fetch PR diffs and post comments to real repositories.
