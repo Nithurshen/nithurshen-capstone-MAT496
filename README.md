@@ -54,9 +54,46 @@ Implement the GitHubTool class using PyGithub. Create functions to fetch PR diff
 Build the core analysis node. This uses gpt-4o-mini with a specialized prompt to detect bugs, security flaws, and style violations in the diffs.
 - [X] **Step 4:** HITL & Graph Orchestration:
 Construct the LangGraph workflow. Implement interrupt_before logic to allow the user to edit/reject AI comments before they are posted.
-- [ ] **Step 5:** Testing & Validation:
+- [X] **Step 5:** Testing & Validation:
 Run the agent against a real "Test Pull Request" to verify it detects issues and posts comments correctly.
 
 ## Conclusion:
 
 I had planned to achieve {this this}. I think I have/have-not achieved the conclusion satisfactorily. The reason for your satisfaction/unsatisfaction.
+
+```commandline
+/Users/nithurshen/SNU/nithurshen-capstone-MAT496/.venv/bin/python /Users/nithurshen/SNU/nithurshen-capstone-MAT496/main.py 
+⚠️  Configuration needed.
+Enter Repo (format: owner/name): aeon-toolkit/aeon
+Enter PR Number: 3133
+🚀 Starting GitGuard AI for PR #3133 in aeon-toolkit/aeon...
+   Thread ID: 72d88ab7-0f34-4b1d-b834-8a05c49f28d1
+
+--- Phase 1: Fetching & Analyzing ---
+🤖 Node 'reviewer' executed.
+🤖 Node '__interrupt__' executed.
+
+⏸️  Workflow Paused for Human Review
+
+📝 Proposed 4 Comments:
+1. [Minor] aeon/transformations/series/smoothing/_loess.py:1
+   "Consider adding a more detailed module docstring that includes usage examples and potential edge cases for better documentation."
+----------------------------------------
+2. [Minor] aeon/transformations/series/smoothing/_loess.py:10
+   "The class docstring should include a description of the expected input types and shapes for better clarity."
+----------------------------------------
+3. [Nitpick] aeon/transformations/series/smoothing/_loess.py:36
+   "The check for `self.degree` could be improved by using a set for valid degrees, which would make it easier to extend in the future if needed."
+----------------------------------------
+4. [Nitpick] aeon/transformations/series/smoothing/_loess.py:66
+   "Consider using `np.clip` for the weights to ensure they remain within valid bounds, which can prevent potential numerical issues."
+----------------------------------------
+
+Approve posting these comments? (yes/no): yes
+
+--- Phase 3: Posting to GitHub ---
+🤖 Node 'poster' executed.
+   Message: 🚀 Review submitted successfully.
+
+Process finished with exit code 0
+```
