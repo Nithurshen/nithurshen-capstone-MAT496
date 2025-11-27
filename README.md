@@ -75,6 +75,10 @@ I used the course knowledge in the following ways:
 - **Tool Calling:** I gave it real tools (`fetch_pr_diff`, `post_pr_review`) to perform actual work.
 - **State Management:** I implemented a shared `ReviewState`, allowing different parts of the application (Agent vs. Tool) to read and write to a common memory structure.
 
+Project Structure:
+
+[Graph](https://github.com/Nithurshen/nithurshen-capstone-MAT496/blob/main/gitguard_workflow.png)
+
 GitGuard AI solves a genuine problem in software development: **Review Fatigue**.
 - **First-Pass Filter**: It catches trivial issues (typos, missing docstrings, minor bugs) automatically, allowing human reviewers to focus on complex architectural logic.
 - **Standardization:** It enforces coding standards consistently across a team, without personal bias.
@@ -120,3 +124,9 @@ Approve posting these comments? (yes/no): yes
 
 Process finished with exit code 0
 ```
+
+[SS1](https://github.com/Nithurshen/nithurshen-capstone-MAT496/blob/main/ss1.png)
+
+[SS2](https://github.com/Nithurshen/nithurshen-capstone-MAT496/blob/main/ss2.png)
+
+*I have deleted the comments now, as it was a real PR that I contributed to an open source project*
