@@ -1,0 +1,17 @@
+langgraph
+langgraph-prebuilt
+langgraph-sdk
+langgraph-checkpoint-sqlite
+langsmith
+langchain-community
+langchain-core
+langchain-openai
+PyGithub
+python-dotenv
+pydantic
+ruff
+notebook
+tavily-python
+wikipedia
+trustcall
+langgraph-cli[inmem]
