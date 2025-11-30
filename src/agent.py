@@ -11,10 +11,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from src.state import ReviewState, PullRequestComment
 from src.tools import fetch_pr_diff
-
-# Initialize the model with low temperature for deterministic analysis
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
-
+from langchain_core.runnables import RunnableConfig
 
 class ReviewResponse(BaseModel):
     """Internal wrapper schema to ensure the LLM returns a list of comments."""
@@ -24,14 +21,18 @@ class ReviewResponse(BaseModel):
     )
 
 
-def reviewer_node(state: ReviewState) -> dict:
+def reviewer_node(state: ReviewState, config: RunnableConfig) -> dict:
     """
     Main agent node: Fetches diff (if needed) -> Analyzes code -> Outputs comments.
 
     Returns:
         dict: Updates for the 'pr_diff' and 'proposed_comments' state keys.
     """
-    # 1. Ensure we have the diff
+    # 1. Retrieve model selection from config (default to gpt-4o-mini)
+    selected_model = config["configurable"].get("model", "gpt-4o-mini")
+    llm = ChatOpenAI(model=selected_model, temperature=0)
+
+    # 2. Ensure we have the diff
     current_diff = state.pr_diff
     if not current_diff:
         # Invoke the tool directly to populate state
@@ -39,7 +40,7 @@ def reviewer_node(state: ReviewState) -> dict:
             {"repo_name": state.repo_name, "pr_number": state.pr_number}
         )
 
-    # 2. Configure the analysis prompt
+    # 3. Configure the analysis prompt
     system_prompt = """You are a strict Senior Code Reviewer.
     Analyze the git diff provided below for:
     1. Security Vulnerabilities (SQLi, XSS, Secrets) - Severity: Critical
@@ -58,15 +59,15 @@ def reviewer_node(state: ReviewState) -> dict:
         ]
     )
 
-    # 3. Create structured chain
+    # 4. Create structured chain
     # We wrap the output in ReviewResponse to handle the list correctly
     structured_llm = llm.with_structured_output(ReviewResponse)
     chain = prompt | structured_llm
 
-    # 4. Execute analysis
+    # 5. Execute analysis
     result = chain.invoke({"repo": state.repo_name, "diff": current_diff})
 
-    # 5. Return state updates
+    # 6. Return state updates
     return {
         "pr_diff": current_diff,
         "proposed_comments": result.comments,

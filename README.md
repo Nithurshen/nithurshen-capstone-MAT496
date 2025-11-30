@@ -56,6 +56,8 @@ Build the core analysis node. This uses gpt-4o-mini with a specialized prompt to
 Construct the LangGraph workflow. Implement interrupt_before logic to allow the user to edit/reject AI comments before they are posted.
 - [X] **Step 5:** Testing & Validation:
 Run the agent against a real "Test Pull Request" to verify it detects issues and posts comments correctly.
+- [X] **Step 6:** Frontend UI:
+Develop a Streamlit web interface with a custom aesthetic (Mercedes/ Star Wars / Teenage Engineering) to provide a user-friendly dashboard for managing reviews.
 
 ## Conclusion:
 
@@ -125,7 +127,7 @@ Approve posting these comments? (yes/no): yes
 Process finished with exit code 0
 ```
 
-![SS1](https://github.com/Nithurshen/gitgaurd-ai/blob/main/media/ss1.pngg)
+![SS1](https://github.com/Nithurshen/gitgaurd-ai/blob/main/media/ss1.png)
 
 ![SS2](https://github.com/Nithurshen/gitgaurd-ai/blob/main/media/ss2.png)
 
